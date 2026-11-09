@@ -1,5 +1,10 @@
 # Deployment
 
+## Akun Kedinasan Resmi (Target Migrasi)
+
+- **Email Instansi**: `prokompimbrebes@gmail.com`
+- **Panduan Migrasi Akun**: Lihat dokumen lengkap di [docs/rencana-migrasi-akun-vercel-supabase.md](file:///D:/Rafa/Projek/SIAP-PRO_Sistem%20Informasi%20Agenda%20Pimpinan%20Prokompim/sistem-spj-protokom/docs/rencana-migrasi-akun-vercel-supabase.md) untuk langkah-langkah pemindahan project Vercel dan Supabase dari akun pribadi ke akun kedinasan.
+
 ## Stack
 
 | Layer | Technology | Catatan |

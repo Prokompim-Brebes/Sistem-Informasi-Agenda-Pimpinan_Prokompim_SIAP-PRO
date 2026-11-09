@@ -1237,3 +1237,20 @@ export type CreateUserInput = {
 - [ ] `npx tsc --noEmit`
 - [ ] `npm run build`
 - [ ] Manual test per fitur
+
+---
+
+## Rencana Infrastruktur & Deployment
+
+### Migrasi Akun Vercel & Supabase ke Akun Resmi Prokompim
+
+| Item | Status | Catatan |
+|------|--------|---------|
+| Email Kedinasan Resmi | ✅ Tersedia | `prokompimbrebes@gmail.com` |
+| Pembuatan Akun Baru | ⏳ Menunggu Eksekusi | Registrasi di Vercel & Supabase menggunakan email kedinasan |
+| Migrasi Database Supabase | ⏳ Menunggu Eksekusi | Transfer project / Backup-Restore dari akun pribadi ke `prokompimbrebes@gmail.com` |
+| Migrasi Hosting Vercel | ⏳ Menunggu Eksekusi | Transfer project / Re-deploy dari repositori Git ke akun Vercel baru |
+| Update Environment Variables | ⏳ Menunggu Eksekusi | `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET` di Vercel baru |
+| Pengujian & 2FA Security | ⏳ Menunggu Eksekusi | Uji verifikasi fungsional dan pengamanan akun kedinasan |
+
+*Panduan teknis detail terdokumentasi di [docs/rencana-migrasi-akun-vercel-supabase.md](file:///D:/Rafa/Projek/SIAP-PRO_Sistem%20Informasi%20Agenda%20Pimpinan%20Prokompim/sistem-spj-protokom/docs/rencana-migrasi-akun-vercel-supabase.md).*
