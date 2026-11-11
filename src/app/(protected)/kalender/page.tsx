@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
 import { getMonthGrid } from "@/lib/kalender";
-import KalenderClient, { KalenderNav } from './kalender-client';
+import KalenderClient, { KalenderNav, KalenderEventChip } from './kalender-client';
 import {
     STATUS_KEGIATAN_OPTIONS,
     STATUS_KEGIATAN_LABEL,
@@ -10,20 +9,12 @@ import {
 
 const NAMA_HARI = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
 
-// Warna dot unruk legend & mobile --- mengikuti tone badge yang sudah ada.
+// Warna dot untuk legend & mobile --- mengikuti tone badge yang sudah ada.
 const DOT_COLOR: Record<StatusKegiatanValue, string> = {
     ACARA_MASUK: 'bg-slate-400',
     MENUNGGU_PENUGASAN: 'bg-amber-400',
     KEGIATAN_SELESAI: 'bg-emerald-400',
     SPJ_SELESAI: 'bg-blue-400',
-};
-
-// Warna chip event di grip desktop --- harus sinkron dengan DOT_COLOR di atas.
-const CHIP_CLASS: Record<StatusKegiatanValue, string> = {
-    ACARA_MASUK: 'bg-slate-100 text-slate-600',
-    MENUNGGU_PENUGASAN: 'bg-amber-50 text-amber-700',
-    KEGIATAN_SELESAI: 'bg-emerald-50 text-emerald-700',
-    SPJ_SELESAI: 'bg-blue-50 text-blue-700',
 };
 
 // Parse ?bulan=YYYY-MM. Invalid/kosong -> bulan berjalan.
@@ -174,34 +165,38 @@ export default async function KalenderPage({
                                                     <span>{nomorTanggal}</span>
                                                 )}
                                             </div>
-                                            <span className="sm:hidden flex items-center gap-1 mt-0.5">
-                                                {list.slice(0, 3).map((k) => (
-                                                    <span
-                                                        key={k.id}
-                                                        className={`w-1.5 h-1.5 rounded-full ${DOT_COLOR[k.statusKegiatan]}`}
-                                                    />
-                                                ))}
-                                                {list.length > 3 && (
-                                                    <button type="button"
-                                                    data-open-tanggal={key}
-                                                    aria-label={`Lihat ${list.length -3} kegiatan lagi`}
-                                                    className="text-[10px] text-navy font-medium underline decoration-dotted underline-offset-2"
+                                            <div className="sm:hidden flex items-center gap-1 mt-0.5">
+                                                {list.length > 0 && (
+                                                    <button
+                                                        type="button"
+                                                        data-open-tanggal={key}
+                                                        aria-label={`Lihat ${list.length} kegiatan tanggal ${tanggal.getDate()}`}
+                                                        className="flex items-center gap-1 cursor-pointer"
                                                     >
-                                                        +{list.length -3}
+                                                        {list.slice(0, 3).map((k) => (
+                                                            <span
+                                                                key={k.id}
+                                                                className={`w-1.5 h-1.5 rounded-full ${DOT_COLOR[k.statusKegiatan]}`}
+                                                            />
+                                                        ))}
+                                                        {list.length > 3 && (
+                                                            <span className="text-[10px] text-navy font-medium underline decoration-dotted underline-offset-2">
+                                                                +{list.length - 3}
+                                                            </span>
+                                                        )}
                                                     </button>
                                                 )}
-                                            </span>
+                                            </div>
                                         </div>
                                         <div className="hidden sm:flex flex-col gap-1">
                                                 {list.slice(0, 2).map((k) => (
-                                                    <Link
+                                                    <KalenderEventChip
                                                         key={k.id}
-                                                        href={`/worksheet/${k.id}`}
-                                                        title={`${k.namaKegiatan}${k.waktu ? ` - ${k.waktu}` : ''}`}
-                                                        className={`truncate rounded px-1.5 py-0.5 text-[11px] leading-tight ${CHIP_CLASS[k.statusKegiatan]}`}
-                                                    >
-                                                        {k.namaKegiatan}
-                                                    </Link>
+                                                        id={k.id}
+                                                        namaKegiatan={k.namaKegiatan}
+                                                        statusKegiatan={k.statusKegiatan}
+                                                        waktu={k.waktu}
+                                                    />
                                                 ))}
                                                 {list.length > 2 && (
                                                     <button

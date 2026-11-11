@@ -18,16 +18,7 @@ import { toDateInput } from '@/lib/format';
 import { setGlobalLoading } from '@/components/global-loading';
 import { StatusKegiatanValue } from '@/lib/constants/status-kegiatan';
 import { validateTransition } from '@/lib/workflow';
-
-const PEJABAT_OPTIONS = [
-  'Bupati',
-  'Wakil Bupati',
-  'Bupati & Wakil Bupati',
-  'Wakil Bupati dan Sekda',
-  '-',
-  'Belum Ditentukan',
-  'Lainnya',
-];
+import { PEJABAT_OPTIONS } from '@/lib/constants/pejabat';
 
 // 12 bulan statis - filter bulan tak lagi diambil dari data.
 const BULAN_NAMA = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];

@@ -1,6 +1,7 @@
 import { Prisma, StatusKegiatan, JenisPenugasan, StatusSambutan } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import type { KegiatanRow } from '@/lib/worksheet';
+import { STANDARD_PEJABAT_OPTIONS } from '@/lib/constants/pejabat';
 
 export async function getKegiatanDetail(id: string) {
     return prisma.kegiatan.findUnique({
@@ -111,7 +112,13 @@ export function buildKegiatanWhere(filters: KegiatanFilter, fromDate?: Date): Pr
     if (filters.statusKegiatan && (Object.values(StatusKegiatan) as string[]).includes(filters.statusKegiatan)) {
         where.statusKegiatan = filters.statusKegiatan as StatusKegiatan;
     }
-    if (filters.pejabat) where.pejabat = filters.pejabat;
+    if (filters.pejabat === 'Lainnya') {
+        where.pejabat = {
+            notIn: [...STANDARD_PEJABAT_OPTIONS, ''],
+        };
+    } else if (filters.pejabat) {
+        where.pejabat = filters.pejabat;
+    }
     if (filters.penugasan && (Object.values(JenisPenugasan) as string[]).includes(filters.penugasan)) {
         where.jenisPenugasan = filters.penugasan as JenisPenugasan;
     }

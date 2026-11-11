@@ -11,16 +11,7 @@ import { JENIS_PENUGASAN_OPTIONS, JENIS_PENUGASAN_LABEL, type JenisPenugasanValu
 import { STATUS_PUBLIKASI_OPTIONS, STATUS_PUBLIKASI_LABEL } from '@/lib/constants/status-publikasi';
 import { toDateInput } from '@/lib/format';
 import { useModalScrollLock } from '@/hooks/use-modal-scroll-lock';
-
-const PEJABAT_OPTIONS = [
-  'Bupati',
-  'Wakil Bupati',
-  'Bupati & Wakil Bupati',
-  'Wakil Bupati dan Sekda',
-  '-',
-  'Belum Ditentukan',
-  'Lainnya',
-];
+import { PEJABAT_OPTIONS } from '@/lib/constants/pejabat';
 
 export default function KegiatanModal({
   item,

@@ -12,6 +12,38 @@ import {
 import { JENIS_PENUGASAN_LABEL, type JenisPenugasanValue } from '@/lib/constants/status-penugasan';
 import { STATUS_PUBLIKASI_LABEL, type StatusPublikasiValue } from '@/lib/constants/status-publikasi';
 import type { JenisDokumenValue, StatusDokumenValue } from '@/lib/constants/status-dokumen';
+import { setGlobalLoading } from '@/components/global-loading';
+
+// Warna chip event di grid desktop --- harus sinkron dengan DOT_COLOR di kalender/page.tsx.
+const CHIP_CLASS: Record<StatusKegiatanValue, string> = {
+  ACARA_MASUK: 'bg-slate-100 text-slate-600',
+  MENUNGGU_PENUGASAN: 'bg-amber-50 text-amber-700',
+  KEGIATAN_SELESAI: 'bg-emerald-50 text-emerald-700',
+  SPJ_SELESAI: 'bg-blue-50 text-blue-700',
+};
+
+export function KalenderEventChip({
+  id,
+  namaKegiatan,
+  statusKegiatan,
+  waktu,
+}: {
+  id: string;
+  namaKegiatan: string;
+  statusKegiatan: StatusKegiatanValue;
+  waktu: string | null;
+}) {
+  return (
+    <Link
+      href={`/worksheet/${id}`}
+      onClick={() => setGlobalLoading(true)}
+      title={`${namaKegiatan}${waktu ? ` - ${waktu}` : ''}`}
+      className={`truncate rounded px-1.5 py-0.5 text-[11px] leading-tight transition-colors hover:brightness-95 ${CHIP_CLASS[statusKegiatan]}`}
+    >
+      {namaKegiatan}
+    </Link>
+  );
+}
 
 const BULAN_NAMA = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -221,6 +253,7 @@ function KegiatanItem({
           <div className="flex justify-end pt-1 border-t border-app">
             <Link
               href={`/worksheet/${k.id}`}
+              onClick={() => setGlobalLoading(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-app text-navy hover:bg-slate-200 transition-colors"
             >
               Lihat Detail <ExternalLink size={11} />
@@ -256,11 +289,19 @@ export default function KalenderClient({
   }, [events]);
 
   // Delegasi klik: trigger (data-open-tanggal) -> buka modal hari itu.
+  // Serta mendeteksi klik link kegiatan (/worksheet/) -> aktifkan global loading screen.
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const handler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+
+      const worksheetLink = target.closest<HTMLAnchorElement>('a[href^="/worksheet/"]');
+      if (worksheetLink) {
+        setGlobalLoading(true);
+        return;
+      }
+
       const trigger = target.closest<HTMLElement>('[data-open-tanggal]');
       if (!trigger) return;
       const key = trigger.dataset.openTanggal;
