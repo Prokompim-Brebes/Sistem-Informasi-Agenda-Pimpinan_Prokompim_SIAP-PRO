@@ -183,7 +183,10 @@ export default function KegiatanModal({
             {errors.namaKegiatan && <p className="text-xs text-red-600 mt-1">{errors.namaKegiatan}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Status Kegiatan</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Status Kegiatan
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <select
               value={form.statusKegiatan}
               onChange={(e) => update('statusKegiatan', e.target.value as (typeof STATUS_KEGIATAN_OPTIONS)[number])}
@@ -208,7 +211,10 @@ export default function KegiatanModal({
               {errors.tanggal && <p className="text-xs text-red-600 mt-1">{errors.tanggal}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Waktu</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Waktu
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input
                 type="time"
                 value={form.waktu}
@@ -227,7 +233,10 @@ export default function KegiatanModal({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Perihal Surat</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Perihal Surat
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <input
               value={form.perihalSurat}
               onChange={(e) => update('perihalSurat', e.target.value)}
@@ -236,7 +245,10 @@ export default function KegiatanModal({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Nomor Surat</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Nomor Surat
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <input value={form.nomorSurat}
             onChange={(e) => update('nomorSurat', e.target.value)}
             className="w-full px-3 py-2 rounded-lg border border-app text-sm"
@@ -244,7 +256,10 @@ export default function KegiatanModal({
           />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Dresscode</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Dresscode
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <input value={form.dresscode}
             onChange={(e) => update('dresscode', e.target.value)}
             className="w-full px-3 py-2 rounded-lg border border-app text-sm"
@@ -253,7 +268,10 @@ export default function KegiatanModal({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium mb-1.5">Pejabat</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Pejabat
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <select
                 value={isCustomPejabat ? 'Lainnya' : form.pejabat}
                 onChange={(e) => {
@@ -285,7 +303,10 @@ export default function KegiatanModal({
               {errors.pejabat && <p className="text-xs text-red-600 mt-1">{errors.pejabat}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Status Sambutan</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Status Sambutan
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <select
                 value={form.statusSambutan}
                 onChange={(e) => update('statusSambutan', e.target.value as 'SUDAH' | 'BELUM')}
@@ -298,7 +319,10 @@ export default function KegiatanModal({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium mb-1.5">No. HP PIC</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                No. HP PIC
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input
                 value={form.picNoHp}
                 onChange={(e) => update('picNoHp', e.target.value)}
@@ -308,7 +332,10 @@ export default function KegiatanModal({
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Leading Sector</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Leading Sector
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <SearchableSelect options={leadingSectorOptions}
               value={form.leadingSectorId || null}
               onChange={(v) => update('leadingSectorId', v || '')}
@@ -328,6 +355,7 @@ export default function KegiatanModal({
           <div>
             <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
               Jenis Penugasan
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
               <span 
                 title={"Biasa: kegiatan hari kerja normal\nLembur: di luar jam/hari kerja\nSPPD: perjalanan dinas ke luar kota"}
                 className="cursor-help text-muted leading-none"
@@ -349,6 +377,7 @@ export default function KegiatanModal({
           <div>
            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
               Status Publikasi
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
               <span  
                 title={"Belum Dirilis: masih draft, belum ada konten yang dipublikasikan\nDirilis: sudah dipublikasikan ke media\nTidak Dirilis: kegiatan memang tidak untuk dipublikasi"}
                 className="cursor-help text-muted leading-none"
@@ -366,6 +395,10 @@ export default function KegiatanModal({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="space-y-2">
+              <p className="text-sm font-medium flex items-center gap-1.5">
+                Penugasan Petugas
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </p>
               <label className="flex items-center gap-2 text-sm cursor-pointer">
                 <input type="checkbox" checked={form.allCrewProtokol}
                   onChange={(e) => update('allCrewProtokol', e.target.checked)}
@@ -424,7 +457,10 @@ export default function KegiatanModal({
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Link Upload Dokumentasi</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Link Upload Dokumentasi
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <input
               value={form.linkUpload}
               onChange={(e) => update('linkUpload', e.target.value)}
@@ -434,7 +470,10 @@ export default function KegiatanModal({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium mb-1.5">Link Tiktok</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Link Tiktok
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input 
                 value={form.linkTiktok || ''}
                 onChange={(e) => update('linkTiktok', e.target.value)}
@@ -443,7 +482,10 @@ export default function KegiatanModal({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Link Instagram</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Link Instagram
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input 
                 value={form.linkInstagram || ''}
                 onChange={(e) => update('linkInstagram', e.target.value)}
@@ -452,7 +494,10 @@ export default function KegiatanModal({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Link Berita Internal</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Link Berita Internal
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input 
                 value={form.linkBeritaInternal || ''}
                 onChange={(e) => update('linkBeritaInternal', e.target.value)}
@@ -461,7 +506,10 @@ export default function KegiatanModal({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Link Berita Eksternal</label>
+              <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+                Link Berita Eksternal
+                <span className="text-xs font-normal text-muted italic">*opsional</span>
+              </label>
               <input 
                 value={form.linkBeritaEksternal || ''}
                 onChange={(e) => update('linkBeritaEksternal', e.target.value)}
@@ -471,7 +519,10 @@ export default function KegiatanModal({
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Catatan</label>
+            <label className="flex items-center gap-1.5 text-sm font-medium mb-1.5">
+              Catatan
+              <span className="text-xs font-normal text-muted italic">*opsional</span>
+            </label>
             <textarea
               value={form.catatan}
               onChange={(e) => update('catatan', e.target.value)}
